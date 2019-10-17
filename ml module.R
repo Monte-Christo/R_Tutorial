@@ -40,8 +40,8 @@ save(model, file = "MyTree.RData")
 
 set.seed(13)
 indexes2 <- sample(x=1:150, size=100)
-train2 <- iris[indexes,]
-test2 <- iris[-indexes,]
+train2 <- iris[indexes2,]
+test2 <- iris[-indexes2,]
 
 # note: model may differ from course model because of different versions of packages and R
 model2 <- tree(formula = Species ~ ., data = train2)
@@ -61,6 +61,7 @@ partition.tree(tree = model2, label = "Species", add = TRUE)
 prediction2 <- predict(object = model2, newdata = test2, type = "class")
 table(x = prediction2, y=test2$Species)
 
-install.packages("caret")
 library(caret)
 confusionMatrix(data= prediction2, reference = test2$Species)
+
+save(model, file = "MyTree2.RData")
